@@ -11,14 +11,17 @@ import {
   } from "@chakra-ui/react"
 
 function OverzichtRow({row}) {
+    const {datum, kmStart, kmStop, locStart, locStop, vervoersmiddel} = row
+    const afstand = kmStop - kmStart
     return (
         <Tr>
-            <Td>{row.vervoersmiddel.naam}</Td>
-            <Td>{row.datum}</Td>
-            <Td>{row.kmStart}</Td>
-            <Td>{row.kmStop}</Td>
-            <Td>{row.locStart}</Td>
-            <Td>{row.locStop}</Td>
+            <Td>{vervoersmiddel.naam}</Td>
+            <Td>{datum}</Td>
+            <Td>{kmStart}</Td>
+            <Td>{kmStop}</Td>
+            <Td>{locStart}</Td>
+            <Td>{locStop}</Td>
+            <Td>{afstand * (vervoersmiddel.tarieven[0].prijs)}</Td>
         </Tr>
     )
 }

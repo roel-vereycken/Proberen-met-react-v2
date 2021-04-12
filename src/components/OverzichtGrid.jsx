@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import OverzichtRow from "./OverzichtRow"
 import {
+    Text,
     Table,
     Thead,
     Tbody,
@@ -20,6 +21,7 @@ function OverzichtGrid() {
     // const [locStop, setLocStop] = useState("")
 
     const [settings, setSettings] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/verplaatsings.json")
@@ -29,13 +31,14 @@ function OverzichtGrid() {
             setSettings(data)
         })
         .catch(error => console.error(error))
+        .finally(() => setLoading(false))
       }, [])
 
       console.log(settings)
 
     return (
         <div>
-            <h1>Verplaatsingen</h1>
+            <Text  fontWeight="extrabold" fontSize={32} textAlign={[ 'left', 'center' ]}>Verplaatsingen</Text>
             <Table variant="simple" size="lg">
                     <Thead>
                         <Tr>
@@ -44,10 +47,12 @@ function OverzichtGrid() {
                         <Th isNumeric>KM/Start</Th>
                         <Th isNumeric>KM/Stop</Th>
                         <Th>Startlocatie</Th>
-                        <Th >Stoplocatie</Th>
+                        <Th>Stoplocatie</Th>
+                        <Th>Vergoeding</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
+                            {loading && <p>Loading ...</p>}
                             {settings && settings.map((row) => {
                                 return(
                                     <OverzichtRow key={row.id} row={row}/>
