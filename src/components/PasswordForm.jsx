@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import Navbar from './Navbar'
 import {
     Input,
     FormControl,
@@ -42,6 +43,7 @@ function PasswordForm() {
 
     return (
         <>
+        <Navbar />
         <h1>Nieuw wachtwoord</h1>
         <form onSubmit={handleFormSubmit}>
           <Flex align="center" justify="center" flexDirection="column">

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import OverzichtRow from "./OverzichtRow"
+import Navbar from './Navbar'
 import {
     Text,
     Table,
@@ -37,7 +38,9 @@ function OverzichtGrid() {
       console.log(settings)
 
     return (
+        
         <div>
+            <Navbar />
             <Text  fontWeight="extrabold" fontSize={32} textAlign={[ 'left', 'center' ]}>Verplaatsingen</Text>
             <Table variant="simple" size="lg">
                     <Thead>

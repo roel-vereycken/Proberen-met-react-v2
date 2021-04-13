@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Navbar from "./Navbar"
 import {
     Input,
     FormControl,
@@ -48,6 +49,7 @@ function RegisterForm() {
     };
     return (
         <>
+        <Navbar />
         <h1 text-allign="center">Registreerformulier</h1>
         <FormControl>
           <form onSubmit={handleFormSubmit}>
