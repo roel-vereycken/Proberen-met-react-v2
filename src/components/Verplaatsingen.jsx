@@ -1,9 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Navbar from './Navbar'
 import {
     Input,
+    Box,
+    Center,
     FormControl,
     Flex,
+    Wrap,
     Select
   } from '@chakra-ui/react';
 
@@ -14,11 +17,26 @@ function Verplaatsingen() {
     const [kmStop, setKmStop] = useState('');
     const [startpunt, setStartpunt] = useState('');
     const [eindpunt, setEindpunt] = useState('');
+    const [voertuig, setVoertuig] = useState('')
+    const [select, setSelect] = useState([])
 
+    useEffect(() => {
+      fetch("http://127.0.0.1:8000/api/vervoersmiddels.json")
+      .then(resp => resp.json())
+      .then(data => {
+        setSelect(data)
+      })
+      .catch(error => console.error(error))
+    }, [])
+
+    console.log(select)
 
     return (
         <>
         <Navbar />
+        <Center>
+        <Wrap>
+        <Box>
         <h1 text-allign="center">Verplaatsingen</h1>
         <FormControl>
           <form>
@@ -71,14 +89,27 @@ function Verplaatsingen() {
                 placeholder="Eindpunt"
                 onChange={e => setEindpunt(e.target.value)}
               />
-              <Select placeholder="Type verplaatsing">
-                <option value="option1">Auto</option>
-                <option value="option2">Fiets</option>
-                </Select>
+              <select name="voertuig"  value={voertuig} onChange={e => setVoertuig(e.target.value)}>
+                {select.map((object) => {
+                  return(
+                    <option>{object.naam}</option>
+                  )
+                })}
+              </select>
+            
               <Input type="submit" value="Registreer" />
             </Flex>
           </form>
         </FormControl>
+        </Box>
+        <Box w={"350px"}>
+          <p>Info:</p>
+          <p>Geef hier jouw gegevens in om je vergoeding aan te vragen.</p>
+          <p>Tarieven:</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, ut aliquam eaque ad aut voluptatem architecto dolorum dolores expedita tempore rerum at voluptates quidem libero aspernatur sit deleniti. Eligendi sed, expedita totam, voluptatem reiciendis recusandae minus modi ipsa doloribus provident quasi culpa iure! Numquam ea ab, nisi distinctio minus saepe.</p>
+        </Box>
+        </Wrap>
+        </Center>
        </> 
     )
 }

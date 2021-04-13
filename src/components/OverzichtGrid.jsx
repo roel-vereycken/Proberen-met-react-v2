@@ -35,7 +35,6 @@ function OverzichtGrid() {
         .finally(() => setLoading(false))
       }, [])
 
-      console.log(settings)
 
     return (
         
