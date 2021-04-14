@@ -44,7 +44,7 @@ function Verplaatsingen() {
           locStart: startpunt,
           locStop: eindpunt,
           user: "/api/users/1",
-          vervoersmiddel: `api/vervoersmiddles/${voertuig}`
+          vervoersmiddel: `api/vervoersmiddels/${voertuig.charAt(0)}`
         }),
       })
         .then(response => response.json())
@@ -134,11 +134,11 @@ function Verplaatsingen() {
                 placeholder="Eindpunt"
                 onChange={e => setEindpunt(e.target.value)}
               />
-              <select name="voertuig"  value={voertuig} onChange={e => setVoertuig(e.target.value)}>
+              <select name="voertuig"  value={voertuig} onChange={e => {setVoertuig(e.target.value); console.log(voertuig)}}>
               <option id="0"></option>
                 {select.map((object) => {
                   return(
-                    <option id={object.id}>{object.naam}</option>
+                    <option id={object.id}>{object.id}. {object.naam}</option>
                   )
                 })}
               </select>
