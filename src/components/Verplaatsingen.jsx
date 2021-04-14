@@ -12,8 +12,8 @@ import {
 
 function Verplaatsingen() {
     const [datum, setDatum] = useState()
-    const [voornaam, setVoorNaam] = useState('');
-    const [naam, setNaam] = useState('');
+    // const [voornaam, setVoorNaam] = useState('');
+    // const [naam, setNaam] = useState('');
     const [kmStart, setKmStart] = useState('');
     const [kmStop, setKmStop] = useState('');
     const [startpunt, setStartpunt] = useState('');
@@ -58,8 +58,7 @@ function Verplaatsingen() {
           console.log(error);
         })
         .finally(() => {
-          setNaam('');
-          setVoorNaam('');
+          
           setDatum('');
           setKmStart('');
           setKmStop('');

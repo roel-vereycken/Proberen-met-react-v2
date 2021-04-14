@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Navbar from "./Navbar"
 import {
     Input,
@@ -19,6 +19,46 @@ function ProfielPagina() {
     const [functie, setFunctie] = useState('');
     const [email, setEmail] = useState('');
 
+    useEffect(() => {
+      fetch("http://127.0.0.1:8000/api/users/1.json")
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+        setNaam(data.naam)
+        setVoorNaam(data.voornaam)
+        setEmail(data.email)
+        setFunctie(data.Functie)
+      })
+      .catch(error => console.error(error))
+    }, [])
+
+    const handleProfileFormSubmit = (e) => {
+      e.preventDefault()
+      fetch('http://127.0.0.1:8000/api/users/1', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          naam: naam,
+          voornaam: voornaam,
+          photo: '/',
+          Functie: functie
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('gelukt');
+          console.log(data);
+        })
+        .catch(error => {
+          console.log('mislukt');
+          console.log(error);
+        })
+        
+    };
+
     return (
         <>
         <Navbar />
@@ -30,7 +70,7 @@ function ProfielPagina() {
         </Box>
         <Box  paddingTop="82px">
         <FormControl>
-          <form>
+          <form onSubmit={handleProfileFormSubmit}>
             <Flex align="center" justify="center" flexDirection="column">
               <Input
                 mb="10"
