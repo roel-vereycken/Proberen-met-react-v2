@@ -1,3 +1,25 @@
+@use './base/fonts';
+
 * {
-  background-color: blue;
+  background-color: grey;
+  background: url('../afbeeldingen/background.jpg') no-repeat;
+  font-family: 'Roboto', sans-serif;
+}
+
+#logobackgroundtest {
+  background: url('../afbeeldingen/thedisplacementapplogo.png') no-repeat;
+  background-size: 300px;
+  width: 300px;
+  height: 250px;
+  padding: 0px;
+  margin-top: 100px;
+}
+
+#buttonHover:active {
+  background-color: #7094c0;
+}
+
+a {
+  text-decoration: none;
+  color: #3cf0f0;
 }
