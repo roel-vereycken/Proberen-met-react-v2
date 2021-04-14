@@ -12,23 +12,19 @@ import Styles from './style/style.scss'
 const App = () => {
   return (
     <>
+    
       <LoginForm />
       <hr/>
       <Verplaatsingen />
       <hr/>
       <ProfielPagina />
       <hr/>
-      <Container maxW="container.lg" centerContent>
-        <RegisterForm />
-      </Container>
+      <RegisterForm />
       <hr />
-      <Container maxW="container.md" centerContent>
-        <OverzichtGrid />
-      </Container>
+      <OverzichtGrid />
       <hr />
-      <Container maxW="container.md" centerContent>
-        <PasswordForm />
-      </Container>
+      <PasswordForm />
+    
     </>
   );
 };
