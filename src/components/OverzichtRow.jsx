@@ -21,7 +21,7 @@ function OverzichtRow({row}) {
             <Td>{kmStop}</Td>
             <Td>{locStart}</Td>
             <Td>{locStop}</Td>
-            <Td>{afstand * (vervoersmiddel.tarieven[0].prijs)}</Td>
+            <Td>{afstand * (vervoersmiddel.tarieven.prijs)}</Td>
         </Tr>
     )
 }

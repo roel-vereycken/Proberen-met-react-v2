@@ -11,6 +11,7 @@ import {
   } from '@chakra-ui/react';
 
 function Verplaatsingen() {
+    const [datum, setDatum] = useState()
     const [voornaam, setVoorNaam] = useState('');
     const [naam, setNaam] = useState('');
     const [kmStart, setKmStart] = useState('');
@@ -29,7 +30,45 @@ function Verplaatsingen() {
       .catch(error => console.error(error))
     }, [])
 
-    console.log(select)
+    const handleVerplaatsingFormSubmit = (e) => {
+      e.preventDefault()
+      fetch('http://127.0.0.1:8000/api/verplaatsings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          datum: datum,
+          kmStart: Number(kmStart),
+          kmStop: Number(kmStop),
+          locStart: startpunt,
+          locStop: eindpunt,
+          user: "/api/users/1",
+          vervoersmiddel: `api/vervoersmiddles/${voertuig}`
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('gelukt');
+          console.log(data);
+          console.log(voertuig)
+        })
+        .catch(error => {
+          console.log('mislukt');
+          console.log(error);
+        })
+        .finally(() => {
+          setNaam('');
+          setVoorNaam('');
+          setDatum('');
+          setKmStart('');
+          setKmStop('');
+          setStartpunt('');
+          setEindpunt('');
+          setVoertuig('');
+        });
+    };
+    
 
     return (
         <>
@@ -39,9 +78,16 @@ function Verplaatsingen() {
         <Box>
         <h1 text-allign="center">Verplaatsingen</h1>
         <FormControl>
-          <form>
+          <form onSubmit={handleVerplaatsingFormSubmit}>
             <Flex align="center" justify="center" flexDirection="column">
-              <Input
+            <Input
+                mb="10"
+                type="date"
+                name="datum"
+                value={datum}
+                onChange={e => setDatum(e.target.value)}
+              />
+              {/* <Input
                 mb="10"
                 type="text"
                 name="voornaam"
@@ -56,10 +102,10 @@ function Verplaatsingen() {
                 value={naam}
                 placeholder="Jouw naam"
                 onChange={e => setNaam(e.target.value)}
-              />
+              /> */}
               <Input
                 mb="10"
-                type="kmStart"
+                type="number"
                 name="kmStart"
                 value={kmStart}
                 placeholder="Kilometer start"
@@ -67,7 +113,7 @@ function Verplaatsingen() {
               />
               <Input
                 mb="10"
-                type="kmStop"
+                type="number"
                 name="kmStop"
                 value={kmStop}
                 placeholder="Kilometer stop"
@@ -75,7 +121,7 @@ function Verplaatsingen() {
               />
               <Input
                 mb="10"
-                type="Startpunt"
+                type="text"
                 name="Startpunt"
                 value={startpunt}
                 placeholder="Startpunt"
@@ -83,16 +129,17 @@ function Verplaatsingen() {
               />
               <Input
                 mb="10"
-                type="Eindpunt"
+                type="text"
                 name="Eindpunt"
                 value={eindpunt}
                 placeholder="Eindpunt"
                 onChange={e => setEindpunt(e.target.value)}
               />
               <select name="voertuig"  value={voertuig} onChange={e => setVoertuig(e.target.value)}>
+              <option id="0"></option>
                 {select.map((object) => {
                   return(
-                    <option>{object.naam}</option>
+                    <option id={object.id}>{object.naam}</option>
                   )
                 })}
               </select>
