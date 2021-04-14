@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Logo from '../afbeeldingen/thedisplacementapplogo.png'
 import {
     Input,
     FormControl,
@@ -18,11 +19,8 @@ function LoginForm() {
     // VRAAG: IMAGE NEEMT GEEN PNG NOG JPEG AAN, ENKEL WEB URL'S
     return (
         <>
-        <Image  src='../afbeeldingen/thedisplacementapplogo.png' w={10} h={10} />
-
         <Center>
-        <Box id="logobackgroundtest">
-        </Box>
+        <Image mt="100px" mb="10px" src={Logo} w={260} h={200} />
         </Center>
         
         <FormControl>

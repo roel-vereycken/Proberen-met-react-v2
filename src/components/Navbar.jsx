@@ -1,5 +1,4 @@
 import React from 'react'
-import { WarningIcon, CheckCircleIcon } from '@chakra-ui/icons'
 import Logo from '../afbeeldingen/thedisplacementapplogo.png';
 import Dummypic from '../afbeeldingen/Dummypic.jpg';
 import {
@@ -11,7 +10,9 @@ import {
     Flex,
     Text,
     IconButton,
-    Image
+    Image,
+    Container,
+    Center
   } from "@chakra-ui/react"
 
 
@@ -23,26 +24,32 @@ import {
 
 function Navbar() {
     return (
-        <Box py={20} backgroundColor="yellow">
-            <Flex alignItems={"center"}>
-            <Box mr={"auto"}>
-                <a href="#" ><Image  src={Logo} w={100} h={70} /> </a>
-            </Box>
-            <Box mr={10}><a href="#"><Text fontSize="10px ">Logout</Text></a></Box>
-            
+        <Center>
+            <Container marginTop="70px" width="80%">
+                <Box py={20}>
+                    <Flex alignItems={"center"}>
+                        <Box mr={"auto"}>
+                            <a href="#" ><Image src={Logo} w={100} h={70} /> </a>
+                        </Box>
+                        <Box mr={10}><a href="#"><Text fontSize="10px ">Logout</Text></a></Box>
+                        
 
-            <Menu>
-                <MenuButton as={IconButton} borderRadius={50} width="48px" height="48px" variant={"link"} cursor={'pointer'}>
-                <Image borderRadius={50}  src={Dummypic} w={50} h={50} />
-                </MenuButton>
-                    <MenuList>
-                        <MenuItem color="white">Profiel</MenuItem>
-                        <MenuItem color="white">Verplaatsing</MenuItem>
-                        <MenuItem color="white">Overzicht</MenuItem>
-                    </MenuList>
-            </Menu>
-            </Flex>
-        </Box>
+                        <Menu>
+                            <Center>
+                            <MenuButton as={IconButton} borderRadius={50} border="10px solid #3cf0f0" width="55px" height="55px" variant={"link"} cursor={'pointer'}>
+                            <Image borderRadius={50} background="none" src={Dummypic} w={50} h={50} pt="3px" pb="-3" pl="1"/>
+                            </MenuButton>
+                            </Center>
+                                <MenuList>
+                                    <MenuItem color="white">Profiel</MenuItem>
+                                    <MenuItem color="white">Verplaatsing</MenuItem>
+                                    <MenuItem color="white">Overzicht</MenuItem>
+                                </MenuList>
+                        </Menu>
+                    </Flex>
+                </Box>
+            </Container>
+        </Center>
     )
 }
 

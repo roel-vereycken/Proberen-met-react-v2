@@ -1,9 +1,12 @@
 @use './base/fonts';
 
 * {
-  background-color: grey;
-  background: url('../afbeeldingen/background.jpg') no-repeat;
   font-family: 'Roboto', sans-serif;
+}
+
+html {
+  background: url('../afbeeldingen/background.jpg') no-repeat;
+  background-size: 100% 100%;
 }
 
 #logobackgroundtest {
@@ -21,5 +24,9 @@
 
 a {
   text-decoration: none;
+  color: #2baaaa;
+}
+
+a:hover {
   color: #3cf0f0;
 }
