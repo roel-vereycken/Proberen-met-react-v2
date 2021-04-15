@@ -25,7 +25,7 @@ function OverzichtGrid() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/verplaatsings.json")
+        fetch("https://127.0.0.1:8000/api/verplaatsings.json")
         .then(resp => resp.json())
         .then(data => {
             //console.log(data)

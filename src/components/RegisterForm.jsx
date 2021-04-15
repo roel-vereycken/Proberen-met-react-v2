@@ -7,6 +7,8 @@ import {
     FormErrorMessage,
     FormHelperText,
     Flex,
+    Text,
+    Box
   } from '@chakra-ui/react';
 
 function RegisterForm() {
@@ -18,7 +20,7 @@ function RegisterForm() {
     const handleFormSubmit = event => {
       event.preventDefault();
   
-      fetch('http://127.0.0.1:8000/api/users', {
+      fetch('https://127.0.0.1:8000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,44 +52,71 @@ function RegisterForm() {
     return (
         <>
         <Navbar />
-        <h1 text-allign="center">Registreerformulier</h1>
         <FormControl>
           <form onSubmit={handleFormSubmit}>
+          
             <Flex align="center" justify="center" flexDirection="column">
+            <Box width="20%" minWidth="300px">
+              <Text fontSize="25px" mb="3" color="#00326f" mt="0px">
+                REGISTRATIE
+              </Text>
+              <Text fontSize="16px" mb="3" color="#3cf0f0">
+                Voornaam:
+              </Text>
               <Input
-                mb="10"
+
                 type="text"
                 name="voornaam"
                 value={voornaam}
                 placeholder="Jouw voornaam"
                 onChange={e => setVoorNaam(e.target.value)}
               />
+              <Text fontSize="16px" mb="3" color="#3cf0f0">
+                Naam:
+              </Text>
               <Input
-                mb="10"
+
                 type="text"
                 name="naam"
                 value={naam}
                 placeholder="Jouw naam"
                 onChange={e => setNaam(e.target.value)}
               />
+              <Text fontSize="16px" mb="3" color="#3cf0f0">
+                Wachtwoord:
+              </Text>
               <Input
-                mb="10"
+
                 type="password"
                 name="password"
                 value={password}
                 placeholder="Wachtwoord"
                 onChange={e => setPassword(e.target.value)}
               />
+              <Text fontSize="16px" mb="3" color="#3cf0f0">
+                Email:
+              </Text>
               <Input
-                mb="10"
                 type="email"
                 name="email"
                 value={email}
                 placeholder="Email"
                 onChange={e => setEmail(e.target.value)}
               />
-              <Input type="submit" value="Registreer" />
+              <Input
+                      mt="15px"
+                      w="100%"
+                      id="buttonHover"
+                      type="submit"
+                      height="30px"
+                      value="Registreer" 
+                      color="white"
+                      bg="#00326f"
+                      borderRadius="5"
+                      />
+              </Box>
             </Flex>
+            
           </form>
         </FormControl>
        </> 

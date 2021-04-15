@@ -25,7 +25,7 @@ import {
 function Navbar() {
     return (
         <Center>
-            <Container marginTop="70px" width="80%">
+            <Container marginTop="70px" width="80%" mb="100px">
                 <Box py={20}>
                     <Flex alignItems={"center"}>
                         <Box mr={"auto"}>
@@ -41,9 +41,11 @@ function Navbar() {
                             </MenuButton>
                             </Center>
                                 <MenuList>
-                                    <MenuItem color="white">Profiel</MenuItem>
-                                    <MenuItem color="white">Verplaatsing</MenuItem>
-                                    <MenuItem color="white">Overzicht</MenuItem>
+                                    <MenuItem className="IconDropDown" h={25} background="#00326f" border="none" borderTopRadius={5} color="white">Profiel</MenuItem>
+                                    <hr/>
+                                    <MenuItem className="IconDropDown" h={25} background="#00326f" border="none" color="white">Nieuwe verplaatsing</MenuItem>
+                                    <hr/>
+                                    <MenuItem className="IconDropDown" h={25} background="#00326f" border="none" borderBottomRadius={5} color="white">Overzicht</MenuItem>
                                 </MenuList>
                         </Menu>
                     </Flex>

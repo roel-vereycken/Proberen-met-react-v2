@@ -31,34 +31,20 @@ function LoginForm() {
                   Email:
                 </Text>
                 <Input
-                  color="black"
-                  outline="none"
-                  bg="white"
-                  borderRadius="5"
-                  height="25"
-                  width="100%"
-                  border="none"
                   type="email"
                   name="email"
                   value={email}
-                  placeholder="Email"
+                  placeholder="Jouw email"
                   onChange={e => setEmail(e.target.value)}
                 />
                 <Text fontSize="16px" mb="3" color="#3cf0f0">
                   Wachtwoord:
                 </Text>
                   <Input
-                    color="black"
-                    outline="none"
-                    bg="white"
-                    borderRadius="5"
-                    border="none"
-                    height="25"
-                    width="100%"
                     type="password"
                     name="password"
                     value={password}
-                    placeholder="Wachtwoord"
+                    placeholder="Jouw wachtwoord"
                     onChange={e => setPassword(e.target.value)}
                   />
                   <Box mt="15px" bgColor="none">
@@ -66,14 +52,10 @@ function LoginForm() {
                     <Input 
                       id="buttonHover"
                       type="submit"
-                      border="none"
-                      boxShadow="none"
-                      outline="none"
                       height="30px"
                       width="130px"
                       value="Verzenden" 
                       color="white"
-                      outline="none"
                       bg="#00326f"
                       borderRadius="5"
                     />

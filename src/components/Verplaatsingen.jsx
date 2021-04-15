@@ -7,6 +7,7 @@ import {
     FormControl,
     Flex,
     Wrap,
+    Text,
     Select
   } from '@chakra-ui/react';
 
@@ -22,7 +23,7 @@ function Verplaatsingen() {
     const [select, setSelect] = useState([])
 
     useEffect(() => {
-      fetch("http://127.0.0.1:8000/api/vervoersmiddels.json")
+      fetch("https://127.0.0.1:8000/api/vervoersmiddels.json")
       .then(resp => resp.json())
       .then(data => {
         setSelect(data)
@@ -32,7 +33,7 @@ function Verplaatsingen() {
 
     const handleVerplaatsingFormSubmit = (e) => {
       e.preventDefault()
-      fetch('http://127.0.0.1:8000/api/verplaatsings', {
+      fetch('https://127.0.0.1:8000/api/verplaatsings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,96 +69,135 @@ function Verplaatsingen() {
         });
     };
     
-
     return (
-        <>
-        <Navbar />
-        <Center>
-        <Wrap>
+      <>
+      <Navbar />
+      <Center>
+      <Box width="80%">
+      <Center>
+      <Wrap spacing="50px">
+      <Box width="300px">
+      <Text mb="10px" mt="0px" fontSize="25px" color="#00326f" text-allign="center">VERPLAATSINGEN</Text>
+      <FormControl>
+      <form onSubmit={handleVerplaatsingFormSubmit}>
+                <Flex align="center" justify="center" flexDirection="column">
+                <Box width="100%">
+                      <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
+                        Datum:
+                      </Text>
+                      <Input
+                          mb="10"
+                          type="datetime-local"
+                          name="datum"
+                          value={datum}
+                          onChange={e => setDatum(e.target.value)}
+                        />
+                        <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
+                        Km-start:
+                        </Text>
+                        <Input
+                          mb="10"
+                          type="number"
+                          name="kmStart"
+                          value={kmStart}
+                          placeholder="Aantal kilometers"
+                          onChange={e => setKmStart(e.target.value)}
+                        />
+                        <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
+                        Km-stop:
+                        </Text>
+                        <Input
+                          mb="10"
+                          type="number"
+                          name="kmStop"
+                          value={kmStop}
+                          placeholder="Aantal kilometers"
+                          onChange={e => setKmStop(e.target.value)}
+                        />
+                        <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
+                        Startpunt:
+                        </Text>
+                        <Input
+                          mb="10"
+                          type="text"
+                          name="Startpunt"
+                          value={startpunt}
+                          placeholder="Adres"
+                          onChange={e => setStartpunt(e.target.value)}
+                        />
+                        <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
+                        Eindpunt:
+                        </Text>
+                        <Input
+                          mb="10"
+                          type="text"
+                          name="Eindpunt"
+                          value={eindpunt}
+                          placeholder="Adres"
+                          onChange={e => setEindpunt(e.target.value)}
+                        />
+                        
+                        <select name="voertuig"  value={voertuig} onChange={e => {setVoertuig(e.target.value); console.log(voertuig)}}>
+                        <option id="0"></option>
+                          {select.map((object) => {
+                            return(
+                              <option id={object.id}>{object.id}. {object.naam}</option>
+                            )
+                          })}
+                        </select>
+                      <Wrap>
+                      <Input
+                      w="45%"
+                      id="buttonHover"
+                      type="submit"
+                      height="30px"
+                      value="Registreer" 
+                      color="white"
+                      bg="#00326f"
+                      borderRadius="5"
+                      />
+                      <Input
+                      w="45%"
+                      id="buttonHoverAnnuleer"
+                      type="submit"
+                      height="30px"
+                      value="Annuleer" 
+                      color="white"
+                      bg="darkred"
+                      borderRadius="5"
+                      />
+                      </Wrap>
+
+                      </Box>
+
+                </Flex>
+
+              </form>
+      </FormControl>
+      </Box>
+      <Center>
+      <Box width="300px" >
+        
         <Box>
-        <h1 text-allign="center">Verplaatsingen</h1>
-        <FormControl>
-          <form onSubmit={handleVerplaatsingFormSubmit}>
-            <Flex align="center" justify="center" flexDirection="column">
-            <Input
-                mb="10"
-                type="date"
-                name="datum"
-                value={datum}
-                onChange={e => setDatum(e.target.value)}
-              />
-              {/* <Input
-                mb="10"
-                type="text"
-                name="voornaam"
-                value={voornaam}
-                placeholder="Jouw voornaam"
-                onChange={e => setVoorNaam(e.target.value)}
-              />
-              <Input
-                mb="10"
-                type="text"
-                name="naam"
-                value={naam}
-                placeholder="Jouw naam"
-                onChange={e => setNaam(e.target.value)}
-              /> */}
-              <Input
-                mb="10"
-                type="number"
-                name="kmStart"
-                value={kmStart}
-                placeholder="Kilometer start"
-                onChange={e => setKmStart(e.target.value)}
-              />
-              <Input
-                mb="10"
-                type="number"
-                name="kmStop"
-                value={kmStop}
-                placeholder="Kilometer stop"
-                onChange={e => setKmStop(e.target.value)}
-              />
-              <Input
-                mb="10"
-                type="text"
-                name="Startpunt"
-                value={startpunt}
-                placeholder="Startpunt"
-                onChange={e => setStartpunt(e.target.value)}
-              />
-              <Input
-                mb="10"
-                type="text"
-                name="Eindpunt"
-                value={eindpunt}
-                placeholder="Eindpunt"
-                onChange={e => setEindpunt(e.target.value)}
-              />
-              <select name="voertuig"  value={voertuig} onChange={e => {setVoertuig(e.target.value); console.log(voertuig)}}>
-              <option id="0"></option>
-                {select.map((object) => {
-                  return(
-                    <option id={object.id}>{object.id}. {object.naam}</option>
-                  )
-                })}
-              </select>
-            
-              <Input type="submit" value="Registreer" />
-            </Flex>
-          </form>
-        </FormControl>
+        <Text fontSize="16px" color="#00326f" my="0px" ml="5px">Info:</Text>
+        <Text fontSize="12px" color="#00326f" my="0px" ml="5px">Geef hier jouw gegevens in om je vergoeding aan te vragen.</Text>
+        <br/>
+        <Text fontSize="16px" color="#00326f" my="0px" ml="5px">Tarieven:</Text>
+        <Text fontSize="12px" color="#00326f" my="0px" ml="5px">Neem je de auto?  1.25 per km.</Text>
+        <Text fontSize="12px" color="#00326f" my="0px" ml="5px">Neem je de fiets? 1.95 per km.</Text>
+        <br/>
+        <Text fontSize="12px" color="#00326f" my="0px" ml="5px">Neem je de bus/trein?Vraag dan een aangifte aan <a href="#">hier</a>. Zo betalen wij een deel van uw abonnements kosten.</Text>
         </Box>
-        <Box w={"350px"}>
-          <p>Info:</p>
-          <p>Geef hier jouw gegevens in om je vergoeding aan te vragen.</p>
-          <p>Tarieven:</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, ut aliquam eaque ad aut voluptatem architecto dolorum dolores expedita tempore rerum at voluptates quidem libero aspernatur sit deleniti. Eligendi sed, expedita totam, voluptatem reiciendis recusandae minus modi ipsa doloribus provident quasi culpa iure! Numquam ea ab, nisi distinctio minus saepe.</p>
-        </Box>
-        </Wrap>
-        </Center>
-       </> 
-    )
+        
+      </Box>
+      </Center>
+      </Wrap>
+      </Center>
+      </Box>
+      </Center>
+      
+     </> 
+  )
 }
 
 export default Verplaatsingen

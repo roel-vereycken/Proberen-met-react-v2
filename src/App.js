@@ -21,9 +21,10 @@ const App = () => {
       <hr/>
       <RegisterForm />
       <hr />
-      <OverzichtGrid />
-      <hr />
       <PasswordForm />
+      <hr />
+      <OverzichtGrid />
+      
     
     </>
   );

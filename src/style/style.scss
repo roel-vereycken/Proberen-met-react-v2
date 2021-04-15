@@ -9,17 +9,11 @@ html {
   background-size: 100% 100%;
 }
 
-#logobackgroundtest {
-  background: url('../afbeeldingen/thedisplacementapplogo.png') no-repeat;
-  background-size: 300px;
-  width: 300px;
-  height: 250px;
-  padding: 0px;
-  margin-top: 100px;
-}
-
 #buttonHover:active {
   background-color: #7094c0;
+}
+#buttonHoverAnnuleer:active {
+  background-color: rgb(161, 53, 53);
 }
 
 a {
@@ -29,4 +23,25 @@ a {
 
 a:hover {
   color: #3cf0f0;
+}
+
+.IconDropDown:hover {
+  background-color: #2baaaa;
+}
+
+hr {
+  margin: 0;
+  background-color: #3cf0f0;
+  height: 1px;
+  border: 0;
+}
+
+input {
+  color: black;
+  outline: none;
+  background: white;
+  border-radius: 5px;
+  height: 25px;
+  width: 100%;
+  border: none;
 }
