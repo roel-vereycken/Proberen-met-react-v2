@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Logo from '../afbeeldingen/thedisplacementapplogo.png'
+import {Link} from 'react-router-dom';
 import {
     Input,
     FormControl,
@@ -26,7 +27,7 @@ function LoginForm() {
         <FormControl>
           <form>
             <Flex align="center" justify="center" flexDirection="column">
-              <Box width="20%" minWidth="300px">
+              <Box width="20%" minWidth="300px" >
                 <Text fontSize="16px" mb="3" color="#3cf0f0">
                   Email:
                 </Text>
@@ -60,7 +61,7 @@ function LoginForm() {
                       borderRadius="5"
                     />
                     <Text fontSize="12px" color="#00326f" my="0px" ml="5px">
-                      Nog geen lid? Maak <a href="#">hier</a> een nieuw account aan!
+                      Nog geen lid? Maak <Link to='/registratie'><a href="#">hier</a></Link> een nieuw account aan!
                     </Text>
                     </Flex>
                   </Box>

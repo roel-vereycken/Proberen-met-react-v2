@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import Navbar from "./Navbar"
 import Profielfoto from "../afbeeldingen/Dummypic.jpg"
 import {
     Input,
@@ -14,7 +13,6 @@ import {
 
 
 
-// HIER GESTOPT MET WERKEN !!! Voeg foto toe naast formulier.
 function ProfielPagina() {
     const [voornaam, setVoorNaam] = useState('');
     const [naam, setNaam] = useState('');
@@ -64,9 +62,9 @@ function ProfielPagina() {
     
     return (
       <>
-      <Navbar />
+      
       <Center>
-      <Box width="80%">
+      <Box width="80%" pb="300px">
       <Center>
       <Wrap spacing="50px">
       <Center>
@@ -145,7 +143,7 @@ function ProfielPagina() {
                       id="buttonHover"
                       type="submit"
                       height="30px"
-                      value="Registreer" 
+                      value="Opslaan" 
                       color="white"
                       bg="#00326f"
                       borderRadius="5"
