@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Logo from '../afbeeldingen/thedisplacementapplogo.png'
 import {
     Input,
@@ -15,6 +15,32 @@ function LoginForm() {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
+    const handelLoginFormSubmit = (e) => {
+      e.preventDefault();
+
+      fetch('https://127.0.0.1:8000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('gelukt');
+          console.log(data);
+        })
+        .catch(error => {
+          console.log('mislukt');
+          console.log(error);
+        })
+        
+    };
+    
+
 
     // VRAAG: IMAGE NEEMT GEEN PNG NOG JPEG AAN, ENKEL WEB URL'S
     return (
@@ -24,7 +50,7 @@ function LoginForm() {
         </Center>
         
         <FormControl>
-          <form>
+          <form onSubmit={handelLoginFormSubmit}>
             <Flex align="center" justify="center" flexDirection="column">
               <Box width="20%" minWidth="300px">
                 <Text fontSize="16px" mb="3" color="#3cf0f0">
