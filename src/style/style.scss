@@ -6,7 +6,10 @@
 
 html {
   background: url('../afbeeldingen/background.jpg') no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
+}
+body {
+  height: 100%;
 }
 
 #buttonHover:active {
@@ -44,4 +47,22 @@ input {
   height: 25px;
   width: 100%;
   border: none;
+}
+th {
+  color: #00326f;
+  font-size: 20px;
+  padding: 10px;
+  background-color: #3cf0f0;
+}
+
+td {
+  color: white;
+  padding: 10px;
+}
+
+#borderL {
+  border-top-left-radius: 10px;
+}
+#borderR {
+  border-top-right-radius: 10px;
 }

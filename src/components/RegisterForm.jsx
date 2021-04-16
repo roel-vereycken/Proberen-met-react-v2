@@ -1,11 +1,8 @@
 import React, {useState} from 'react'
-import Navbar from "./Navbar"
+import { useHistory } from 'react-router-dom';
 import {
     Input,
     FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Flex,
     Text,
     Box
@@ -16,6 +13,7 @@ function RegisterForm() {
     const [naam, setNaam] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const history = useHistory();
   
     const handleFormSubmit = event => {
       event.preventDefault();
@@ -48,15 +46,15 @@ function RegisterForm() {
           setPassword('');
           setEmail('');
         });
+        history.push('/login') /// Hiermee verwijs je door naar de gewenste pagina. Best nog een controle tussensteken.
     };
     return (
         <>
-        <Navbar />
         <FormControl>
           <form onSubmit={handleFormSubmit}>
           
             <Flex align="center" justify="center" flexDirection="column">
-            <Box width="20%" minWidth="300px">
+            <Box width="20%" minWidth="300px" paddingTop="150px" pb="350px">
               <Text fontSize="25px" mb="3" color="#00326f" mt="0px">
                 REGISTRATIE
               </Text>

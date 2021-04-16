@@ -45,7 +45,6 @@ function PasswordForm() {
 
     return (
         <>
-        <Navbar />
         <form onSubmit={handleFormSubmit}>
           <Flex align="center" justify="center" flexDirection="column">
           <Box width="20%" minWidth="300px">

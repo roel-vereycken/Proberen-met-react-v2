@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import Navbar from './Navbar'
 import {
     Input,
     Box,
@@ -8,7 +7,6 @@ import {
     Flex,
     Wrap,
     Text,
-    Select
   } from '@chakra-ui/react';
 
 function Verplaatsingen() {
@@ -71,9 +69,9 @@ function Verplaatsingen() {
     
     return (
       <>
-      <Navbar />
+      
       <Center>
-      <Box width="80%">
+      <Box width="80%" marginBottom="100px">
       <Center>
       <Wrap spacing="50px">
       <Box width="300px">
@@ -81,7 +79,7 @@ function Verplaatsingen() {
       <FormControl>
       <form onSubmit={handleVerplaatsingFormSubmit}>
                 <Flex align="center" justify="center" flexDirection="column">
-                <Box width="100%">
+                <Box width="100%" >
                       <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
                         Datum:
                       </Text>

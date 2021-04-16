@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import OverzichtRow from "./OverzichtRow"
-import Navbar from './Navbar'
 import {
     Text,
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
-    Td,
-    TableCaption,
+    Box,
+    Center,
+    Input,
+    Flex
   } from "@chakra-ui/react"
 
 function OverzichtGrid() {
@@ -39,18 +39,32 @@ function OverzichtGrid() {
     return (
         
         <div>
-            <Navbar />
-            <Text  fontWeight="extrabold" fontSize={32} textAlign={[ 'left', 'center' ]}>Verplaatsingen</Text>
+            <Center>
+            <Box>
+                <Flex align="center">
+            <Text fontWeight="extrabold" color="#00326f"  fontSize={32}>OVERZICHT</Text>
+            <Input
+                      ml="auto"
+                      w="100px"
+                      id="buttonHover"
+                      type="submit"
+                      height="30px"
+                      value="Download" 
+                      color="white"
+                      bg="#00326f"
+                      borderRadius="5"
+                      />
+                      </Flex>
             <Table variant="simple" size="lg">
                     <Thead>
                         <Tr>
-                        <Th>Vervoersmiddel</Th>
+                        <Th id="borderL">Vervoersmiddel</Th>
                         <Th>Datum</Th>
                         <Th isNumeric>KM/Start</Th>
                         <Th isNumeric>KM/Stop</Th>
                         <Th>Startlocatie</Th>
                         <Th>Stoplocatie</Th>
-                        <Th>Vergoeding</Th>
+                        <Th id="borderR">Vergoeding</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -62,6 +76,8 @@ function OverzichtGrid() {
                             })}
                     </Tbody>
                     </Table>
+                    </Box>
+                    </Center>
         </div>
     )
 }
