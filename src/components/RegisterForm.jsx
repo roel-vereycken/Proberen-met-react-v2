@@ -18,7 +18,7 @@ function RegisterForm() {
     const handleFormSubmit = event => {
       event.preventDefault();
   
-      fetch('https://127.0.0.1:8000/api/users', {
+      fetch('http://127.0.0.1:8000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

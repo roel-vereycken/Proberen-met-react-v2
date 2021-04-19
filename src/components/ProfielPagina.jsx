@@ -14,13 +14,24 @@ import {
 
 
 function ProfielPagina() {
+
+  /**
+   * GET USER ID
+   */
+    let userId = localStorage.getItem("user");
+      userId = JSON.parse(userId);
+      let id = userId.user
+
     const [voornaam, setVoorNaam] = useState('');
     const [naam, setNaam] = useState('');
     const [functie, setFunctie] = useState('');
     const [email, setEmail] = useState('');
+    const [user, setUser] = useState(id)
+
+    
 
     useEffect(() => {
-      fetch("https://127.0.0.1:8000/api/users/1.json")
+      fetch(`http://127.0.0.1:8000/api/users/${user}.json`)
       .then(resp => resp.json())
       .then(data => {
         console.log(data)
@@ -30,11 +41,11 @@ function ProfielPagina() {
         setFunctie(data.Functie)
       })
       .catch(error => console.error(error))
-    }, [])
+    }, [user])
 
     const handleProfileFormSubmit = (e) => {
       e.preventDefault()
-      fetch('https://127.0.0.1:8000/api/users/1', {
+      fetch(`http://127.0.0.1:8000/api/users/${user}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

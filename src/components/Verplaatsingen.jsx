@@ -10,6 +10,15 @@ import {
   } from '@chakra-ui/react';
 
 function Verplaatsingen() {
+
+    /**
+   * GET USER ID
+   */
+    let userId = localStorage.getItem("user");
+    userId = JSON.parse(userId);
+    let id = userId.user
+
+
     const [datum, setDatum] = useState()
     // const [voornaam, setVoorNaam] = useState('');
     // const [naam, setNaam] = useState('');
@@ -19,9 +28,10 @@ function Verplaatsingen() {
     const [eindpunt, setEindpunt] = useState('');
     const [voertuig, setVoertuig] = useState('')
     const [select, setSelect] = useState([])
+    const [user, setUser] = useState(id)
 
     useEffect(() => {
-      fetch("https://127.0.0.1:8000/api/vervoersmiddels.json")
+      fetch("http://127.0.0.1:8000/api/vervoersmiddels.json")
       .then(resp => resp.json())
       .then(data => {
         setSelect(data)
@@ -31,7 +41,7 @@ function Verplaatsingen() {
 
     const handleVerplaatsingFormSubmit = (e) => {
       e.preventDefault()
-      fetch('https://127.0.0.1:8000/api/verplaatsings', {
+      fetch('http://127.0.0.1:8000/api/verplaatsings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +52,7 @@ function Verplaatsingen() {
           kmStop: Number(kmStop),
           locStart: startpunt,
           locStop: eindpunt,
-          user: "/api/users/1",
+          user: `/api/users/${user}`,
           vervoersmiddel: `api/vervoersmiddels/${voertuig.charAt(0)}`
         }),
       })
