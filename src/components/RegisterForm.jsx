@@ -82,7 +82,7 @@ function RegisterForm() {
           naam: naam,
           voornaam: voornaam,
           photo: '/',
-          functie: functie
+          Functie: functie
         }),
       })
         .then(response => response.json())
@@ -107,6 +107,8 @@ function RegisterForm() {
         if(errors.length === 0) {
           history.push('/') /// Hiermee verwijs je door naar de gewenste pagina. Controle op errors, zo niet wijs door naar login
         }
+
+        
     };
     return (
         <>
