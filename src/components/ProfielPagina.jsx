@@ -107,8 +107,8 @@ function ProfielPagina() {
             setErrors(data.violations)
           }else{
             setErrors([]);
+            setAlert(true)
           };
-          setAlert(true)
         })
         .catch(error => {
           console.log('mislukt');

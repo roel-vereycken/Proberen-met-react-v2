@@ -65,6 +65,8 @@ function RegisterForm() {
         }
       }
     }, [errors])
+
+    
   
     const handleFormSubmit = event => {
       event.preventDefault();
@@ -89,7 +91,12 @@ function RegisterForm() {
         .then(data => {
           console.log('gelukt');
           console.log(data);
-          setErrors(data.violations);
+          if(data.violations){
+            setErrors(data.violations)
+          }else{
+            setErrors([]);
+              history.push('/') /// Hiermee verwijs je door naar de gewenste pagina. Controle op errors, zo niet wijs door naar logig
+          };
         })
         
         .catch(error => {
@@ -101,12 +108,12 @@ function RegisterForm() {
           setVoorNaam('');
           setPassword('');
           setEmail('');
-          setFunctie('')
-        });
+          setFunctie('');
+          });
+        
 
-        if(errors.length === 0) {
-          history.push('/') /// Hiermee verwijs je door naar de gewenste pagina. Controle op errors, zo niet wijs door naar login
-        }
+
+
 
         
     };
