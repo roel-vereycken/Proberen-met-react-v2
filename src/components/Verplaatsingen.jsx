@@ -26,12 +26,16 @@ function Verplaatsingen() {
     const [kmStop, setKmStop] = useState('');
     const [startpunt, setStartpunt] = useState('');
     const [eindpunt, setEindpunt] = useState('');
+
+    const [optionsState, setOptionState] = useState("")
+
     const [voertuig, setVoertuig] = useState('')
+    const [voertuigId, setVoertuigId] = useState('')
     const [select, setSelect] = useState([])
-    const [user, setUser] = useState(id)
+    const [user, setUser] = useState(1)
 
     useEffect(() => {
-      fetch("https://127.0.0.1:8000/api/vervoersmiddels.json")
+      fetch("http://127.0.0.1:8000/api/vervoersmiddels.json")
       .then(resp => resp.json())
       .then(data => {
         setSelect(data)
@@ -41,7 +45,7 @@ function Verplaatsingen() {
 
     const handleVerplaatsingFormSubmit = (e) => {
       e.preventDefault()
-      fetch('https://127.0.0.1:8000/api/verplaatsings', {
+      fetch('http://127.0.0.1:8000/api/verplaatsings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +57,7 @@ function Verplaatsingen() {
           locStart: startpunt,
           locStop: eindpunt,
           user: `/api/users/${user}`,
-          vervoersmiddel: `api/vervoersmiddels/${voertuig.charAt(0)}`
+          vervoersmiddel: `api/vervoersmiddels/${optionsState}`
         }),
       })
         .then(response => response.json())
@@ -145,11 +149,12 @@ function Verplaatsingen() {
                           onChange={e => setEindpunt(e.target.value)}
                         />
                         
-                        <select name="voertuig"  value={voertuig} onChange={e => {setVoertuig(e.target.value); console.log(voertuig)}}>
+                        <select name="voertuig"  value={optionsState} onChange={e => {setOptionState(e.target.value)}}>
                         <option id="0"></option>
                           {select.map((object) => {
+                            
                             return(
-                              <option id={object.id}>{object.id}. {object.naam}</option>
+                              <option value={object.id}> {object.naam}</option>
                             )
                           })}
                         </select>
