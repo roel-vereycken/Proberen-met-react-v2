@@ -23,7 +23,7 @@ function LoginForm() {
     const handelLoginFormSubmit = (e) => {
       e.preventDefault();
 
-      fetch('http://127.0.0.1:8000/login', {
+      fetch('https://127.0.0.1:8000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useHistory } from 'react-router-dom';
 import {
     Input,
@@ -13,12 +13,65 @@ function RegisterForm() {
     const [naam, setNaam] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [functie, setFunctie] = useState('');
+
+    // DOORVERWIJZING LINK
     const history = useHistory();
+
+    // ERROR MESSAGES
+    const [errors, setErrors] = useState([]);
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+    const [emailErrorMessage, setEmailErrorMessage] = useState("");
+    const [voornaamErrorMessage, setVoornaamErrorMessage] = useState("");
+    const [naamErrorMessage, setNaamErrorMessage] = useState("");
+    const [functieErrorMessage, setFunctieErrorMessage] = useState("");
+    let emailError ="";
+    let passwordError ="";
+    let voornaamError = "";
+    let naamError ="";
+    let functieError = "";
+
+
+    /// FUNCTIEBESCHRIJVING WORD NIET MEE DOORGEGEVEN AAN DE DATABANK
+    
+
+    useEffect(() => {
+      console.log(errors)
+      if(errors.length >= 1){
+        if(errors.filter((object)=> object.propertyPath === "email")){
+          emailError = (errors.filter((object)=> object.propertyPath === "email"));
+          setEmailErrorMessage(emailError[0].message)
+          
+        }
+        if(errors.filter((object)=> object.propertyPath === "password")){
+          passwordError = (errors.filter((object)=> object.propertyPath === "password"));
+          setPasswordErrorMessage(passwordError[0].message)
+          //console.log(passwordErrorMessage)
+        }
+        if(errors.filter((object)=> object.propertyPath === "voornaam")){
+          voornaamError = (errors.filter((object)=> object.propertyPath === "voornaam"));
+          setVoornaamErrorMessage(voornaamError[0].message)
+          //console.log(voornaamErrorMessage)
+        }
+        if(errors.filter((object)=> object.propertyPath === "naam")){
+          naamError = (errors.filter((object)=> object.propertyPath === "naam"));
+          setNaamErrorMessage(naamError[0].message)
+          //console.log(voornaamErrorMessage)
+        }
+        if(errors.filter((object)=> object.propertyPath === "Functie")){
+          functieError = (errors.filter((object)=> object.propertyPath === "Functie"));
+          setFunctieErrorMessage(functieError[0].message)
+          //console.log(voornaamErrorMessage)
+        }
+      }
+    }, [errors])
   
     const handleFormSubmit = event => {
       event.preventDefault();
+
+      
   
-      fetch('http://127.0.0.1:8000/api/users', {
+      fetch('https://127.0.0.1:8000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,13 +82,16 @@ function RegisterForm() {
           naam: naam,
           voornaam: voornaam,
           photo: '/',
+          functie: functie
         }),
       })
         .then(response => response.json())
         .then(data => {
           console.log('gelukt');
           console.log(data);
+          setErrors(data.violations);
         })
+        
         .catch(error => {
           console.log('mislukt');
           console.log(error);
@@ -45,8 +101,12 @@ function RegisterForm() {
           setVoorNaam('');
           setPassword('');
           setEmail('');
+          setFunctie('')
         });
-        history.push('/login') /// Hiermee verwijs je door naar de gewenste pagina. Best nog een controle tussensteken.
+
+        if(errors.length === 0) {
+          history.push('/') /// Hiermee verwijs je door naar de gewenste pagina. Controle op errors, zo niet wijs door naar login
+        }
     };
     return (
         <>
@@ -69,6 +129,8 @@ function RegisterForm() {
                 placeholder="Jouw voornaam"
                 onChange={e => setVoorNaam(e.target.value)}
               />
+              {errors.length >= 1 && <Text fontSize="12px" color="red" >{voornaamErrorMessage}</Text>}
+
               <Text fontSize="16px" mb="3" color="#3cf0f0">
                 Naam:
               </Text>
@@ -80,6 +142,8 @@ function RegisterForm() {
                 placeholder="Jouw naam"
                 onChange={e => setNaam(e.target.value)}
               />
+              {errors.length >= 1 && <Text fontSize="12px" color="red" >{naamErrorMessage}</Text>}
+
               <Text fontSize="16px" mb="3" color="#3cf0f0">
                 Wachtwoord:
               </Text>
@@ -91,6 +155,9 @@ function RegisterForm() {
                 placeholder="Wachtwoord"
                 onChange={e => setPassword(e.target.value)}
               />
+              {errors.length >= 1 && <Text fontSize="12px" color="red" >{passwordErrorMessage}</Text>}
+
+
               <Text fontSize="16px" mb="3" color="#3cf0f0">
                 Email:
               </Text>
@@ -101,6 +168,20 @@ function RegisterForm() {
                 placeholder="Email"
                 onChange={e => setEmail(e.target.value)}
               />
+              {errors.length >= 1 && <Text fontSize="12px" color="red" >{emailErrorMessage}</Text>}
+
+              <Text fontSize="16px" mb="3" color="#3cf0f0">
+                Functie:
+              </Text>
+              <Input
+                type="text"
+                name="functie"
+                value={functie}
+                placeholder="Jobbeschrijving"
+                onChange={e => setFunctie(e.target.value)}
+              />
+              {errors.length >= 1 && <Text fontSize="12px" color="red" >{functieErrorMessage}</Text>}
+
               <Input
                       mt="15px"
                       w="100%"

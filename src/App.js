@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import LoginForm from './components/LoginForm';
 import ProfielPagina from './components/ProfielPagina';
 import Verplaatsingen from './components/Verplaatsingen';
-import Styles from './style/style.scss'
+import Styles from './style/style.scss';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
     <Router>
     <>
     <Switch>
-      <Route exact path="/login" component={LoginForm}/>
+      <Route exact path="/" component={LoginForm}/>
       <Route path="/registratie" component={RegisterForm}/>
       <div>
       <Navbar/>

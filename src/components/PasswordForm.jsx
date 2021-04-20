@@ -18,7 +18,7 @@ function PasswordForm() {
     const handleFormSubmit = event => {
         event.preventDefault();
     
-        fetch('http://127.0.0.1:8000/api/users/1', {
+        fetch('https://127.0.0.1:8000/api/users/1', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

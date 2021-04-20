@@ -25,7 +25,7 @@ function OverzichtGrid() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/verplaatsings.json?order[datum]=desc&user.id=1")
+        fetch("https://127.0.0.1:8000/api/verplaatsings.json?order[datum]=desc&user.id=1")
         .then(resp => resp.json())
         .then(data => {
             //console.log(data)

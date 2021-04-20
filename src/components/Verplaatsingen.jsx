@@ -31,7 +31,7 @@ function Verplaatsingen() {
     const [user, setUser] = useState(id)
 
     useEffect(() => {
-      fetch("http://127.0.0.1:8000/api/vervoersmiddels.json")
+      fetch("https://127.0.0.1:8000/api/vervoersmiddels.json")
       .then(resp => resp.json())
       .then(data => {
         setSelect(data)
@@ -41,7 +41,7 @@ function Verplaatsingen() {
 
     const handleVerplaatsingFormSubmit = (e) => {
       e.preventDefault()
-      fetch('http://127.0.0.1:8000/api/verplaatsings', {
+      fetch('https://127.0.0.1:8000/api/verplaatsings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

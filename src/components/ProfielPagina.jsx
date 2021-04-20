@@ -31,7 +31,7 @@ function ProfielPagina() {
     
 
     useEffect(() => {
-      fetch(`http://127.0.0.1:8000/api/users/${user}.json`)
+      fetch(`https://127.0.0.1:8000/api/users/${user}.json`)
       .then(resp => resp.json())
       .then(data => {
         console.log(data)
@@ -45,7 +45,7 @@ function ProfielPagina() {
 
     const handleProfileFormSubmit = (e) => {
       e.preventDefault()
-      fetch(`http://127.0.0.1:8000/api/users/${user}`, {
+      fetch(`https://127.0.0.1:8000/api/users/${user}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
