@@ -16,7 +16,7 @@ function Vervoersmiddel() {
     const handleVervoersmiddelFormSubmit = (e) => {
     e.preventDefault();
   
-    fetch('http://127.0.0.1:8000/api/vervoersmiddels', {
+    fetch('https://127.0.0.1:8000/api/vervoersmiddels', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
