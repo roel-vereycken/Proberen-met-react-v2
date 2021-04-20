@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import Profielfoto from "../afbeeldingen/Dummypic.jpg"
+import Profielfoto from "../afbeeldingen/Dummypic.jpg";
+import {useHistory} from "react-router-dom";
 import {
     Input,
     FormControl,
@@ -26,12 +27,51 @@ function ProfielPagina() {
     const [naam, setNaam] = useState('');
     const [functie, setFunctie] = useState('');
     const [email, setEmail] = useState('');
-    const [user, setUser] = useState(id)
+    const [user, setUser] = useState(1);    /// HIER TERUG VERANDER IN ID
+    const [alert, setAlert] = useState(false);
+
+    const history = useHistory();
 
     
 
+    // ERROR MESSAGES
+    const [errors, setErrors] = useState([]);
+    const [voornaamErrorMessage, setVoornaamErrorMessage] = useState("");
+    const [naamErrorMessage, setNaamErrorMessage] = useState("");
+    const [emailErrorMessage, setEmailErrorMessage] = useState("");
+    const [functieErrorMessage, setFunctieErrorMessage] = useState("");
+    let voornaamError = "";
+    let naamError = "";
+    let functieError ="";
+    let emailError = "";
+
+
+    
     useEffect(() => {
-      fetch(`https://127.0.0.1:8000/api/users/${user}.json`)
+      console.log(errors)
+      if(errors.length >= 1){
+        if(errors.filter((object)=> object.propertyPath === "voornaam")){
+          voornaamError = (errors.filter((object)=> object.propertyPath === "voornaam"));
+          setVoornaamErrorMessage(voornaamError[0].message)
+          
+        }
+        if(errors.filter((object)=> object.propertyPath === "email")){
+          emailError = (errors.filter((object)=> object.propertyPath === "email"));
+          setEmailErrorMessage(emailError[0].message)
+        }
+        if(errors.filter((object)=> object.propertyPath === "naam")){
+          naamError = (errors.filter((object)=> object.propertyPath === "naam"));
+          setNaamErrorMessage(naamError[0].message)
+        }
+        if(errors.filter((object)=> object.propertyPath === "Functie")){
+          functieError = (errors.filter((object)=> object.propertyPath === "Functie"));
+          setFunctieErrorMessage(functieError[0].message)
+        }
+      }
+    }, [errors])
+
+    useEffect(() => {
+      fetch(`https://127.0.0.1:8000/api/users/${user}`)   //  /${user}.json
       .then(resp => resp.json())
       .then(data => {
         console.log(data)
@@ -45,7 +85,7 @@ function ProfielPagina() {
 
     const handleProfileFormSubmit = (e) => {
       e.preventDefault()
-      fetch(`https://127.0.0.1:8000/api/users/${user}`, {
+      fetch(`https://127.0.0.1:8000/api/users/${user}`, {     //  /${user}
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -62,11 +102,24 @@ function ProfielPagina() {
         .then(data => {
           console.log('gelukt');
           console.log(data);
+          console.log(data.violations)
+          if(data.violations){
+            setErrors(data.violations)
+          }else{
+            setErrors([]);
+          };
+          setAlert(true)
         })
         .catch(error => {
           console.log('mislukt');
           console.log(error);
         })
+        
+
+        if (errors.length === 0){
+
+          history.push("/profiel")
+        }
         
     };
 
@@ -74,6 +127,9 @@ function ProfielPagina() {
     return (
       <>
       
+      /** ALERT MESSAGE */
+      <Center>{alert && <Text fontSize="12px" color="green">Uw gegevens zijn aangepast!</Text>}</Center>  
+
       <Center>
       <Box width="80%" pb="300px">
       <Center>
@@ -115,6 +171,8 @@ function ProfielPagina() {
                         placeholder="Jouw voornaam"
                         onChange={e => setVoorNaam(e.target.value)}
                       />
+                      {errors.length >= 1 && <Text fontSize="12px" color="red" >{voornaamErrorMessage}</Text>}
+
                         <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
                         Naam:
                         </Text>
@@ -126,6 +184,8 @@ function ProfielPagina() {
                           placeholder="Jouw naam"
                           onChange={e => setNaam(e.target.value)}
                         />
+                        {errors.length >= 1 && <Text fontSize="12px" color="red" >{naamErrorMessage}</Text>}
+
                         <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
                         Email:
                         </Text>
@@ -137,6 +197,8 @@ function ProfielPagina() {
                           placeholder="Email"
                           onChange={e => setEmail(e.target.value)}
                         />
+                        {errors.length >= 1 && <Text fontSize="12px" color="red" >{emailErrorMessage}</Text>}
+
                         <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
                         Functie:
                         </Text>
@@ -148,6 +210,9 @@ function ProfielPagina() {
                           placeholder="Functie"
                           onChange={e => setFunctie(e.target.value)}
                         />
+                        {errors.length >= 1 && <Text fontSize="12px" color="red" >{functieErrorMessage}</Text>}
+
+
                       <Wrap>
                       <Input
                       w="45%"
