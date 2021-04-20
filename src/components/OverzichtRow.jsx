@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {
     Tr,
     Td,
@@ -6,7 +6,18 @@ import {
 
 function OverzichtRow({row}) {
     const {datum, kmStart, kmStop, locStart, locStop, vervoersmiddel} = row
+    const [tarief, setTarief] = useState(vervoersmiddel.tarieven.filter((obj) => {return obj.published === true}))
+    const [tariefPrijs, setTariefPrijs] = useState()
     const afstand = kmStop - kmStart
+
+    useEffect(() => {
+        if (tarief.length >= 1 ) {
+            setTariefPrijs(tarief[0].prijs)
+        }
+    }, [tarief])
+    
+
+    console.log(tarief)
     return (
         <Tr>
             <Td>{vervoersmiddel.naam}</Td>
@@ -15,7 +26,7 @@ function OverzichtRow({row}) {
             <Td>{kmStop}</Td>
             <Td>{locStart}</Td>
             <Td>{locStop}</Td>
-            <Td>{afstand * (vervoersmiddel.tarieven.prijs)}</Td>
+            <Td>{afstand * tariefPrijs}</Td>
         </Tr>
     )
 }
