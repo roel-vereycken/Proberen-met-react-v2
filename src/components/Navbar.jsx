@@ -32,7 +32,7 @@ function Navbar() {
                         <Box mr={"auto"}>
                             <a href="#" ><Image src={Logo} w={100} h={70} /> </a>
                         </Box>
-                        <Box mr={10}><a href="#"><Text fontSize="10px ">Logout</Text></a></Box>
+                        <Box mr={10}><Link><a href="#"><Text fontSize="10px ">Logout</Text></a></Link></Box>
                         
 
                         <Menu>
