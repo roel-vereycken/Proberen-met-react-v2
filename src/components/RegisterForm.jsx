@@ -20,11 +20,11 @@ function RegisterForm() {
 
     // ERROR MESSAGES
     const [errors, setErrors] = useState([]);
-    const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
-    const [emailErrorMessage, setEmailErrorMessage] = useState("");
-    const [voornaamErrorMessage, setVoornaamErrorMessage] = useState("");
-    const [naamErrorMessage, setNaamErrorMessage] = useState("");
-    const [functieErrorMessage, setFunctieErrorMessage] = useState("");
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState([]);
+    const [emailErrorMessage, setEmailErrorMessage] = useState([]);
+    const [voornaamErrorMessage, setVoornaamErrorMessage] = useState([]);
+    const [naamErrorMessage, setNaamErrorMessage] = useState([]);
+    const [functieErrorMessage, setFunctieErrorMessage] = useState([]);
     let emailError ="";
     let passwordError ="";
     let voornaamError = "";
@@ -40,27 +40,27 @@ function RegisterForm() {
       if(errors.length >= 1){
         if(errors.filter((object)=> object.propertyPath === "email")){
           emailError = (errors.filter((object)=> object.propertyPath === "email"));
-          setEmailErrorMessage(emailError[0].message)
+          setEmailErrorMessage(emailError.map((obj) => obj.message))
           
         }
         if(errors.filter((object)=> object.propertyPath === "password")){
           passwordError = (errors.filter((object)=> object.propertyPath === "password"));
-          setPasswordErrorMessage(passwordError[0].message)
+          setPasswordErrorMessage(passwordError.map((obj) => obj.message))
           //console.log(passwordErrorMessage)
         }
         if(errors.filter((object)=> object.propertyPath === "voornaam")){
           voornaamError = (errors.filter((object)=> object.propertyPath === "voornaam"));
-          setVoornaamErrorMessage(voornaamError[0].message)
+          setVoornaamErrorMessage(voornaamError.map((obj) => obj.message))
           //console.log(voornaamErrorMessage)
         }
         if(errors.filter((object)=> object.propertyPath === "naam")){
           naamError = (errors.filter((object)=> object.propertyPath === "naam"));
-          setNaamErrorMessage(naamError[0].message)
+          setNaamErrorMessage(naamError.map((obj) => obj.message))
           //console.log(voornaamErrorMessage)
         }
         if(errors.filter((object)=> object.propertyPath === "Functie")){
           functieError = (errors.filter((object)=> object.propertyPath === "Functie"));
-          setFunctieErrorMessage(functieError[0].message)
+          setFunctieErrorMessage(functieError.map((obj) => obj.message))
           //console.log(voornaamErrorMessage)
         }
       }
@@ -73,7 +73,7 @@ function RegisterForm() {
 
       
   
-      fetch('https://127.0.0.1:8000/api/users', {
+      fetch('http://127.0.0.1:8000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function RegisterForm() {
             setErrors(data.violations)
           }else{
             setErrors([]);
-              history.push('/') /// Hiermee verwijs je door naar de gewenste pagina. Controle op errors, zo niet wijs door naar logig
+            history.push('/') /// Hiermee verwijs je door naar de gewenste pagina. Controle op errors, zo niet wijs door naar logig
           };
         })
         
