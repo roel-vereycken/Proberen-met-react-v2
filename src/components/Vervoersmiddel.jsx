@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {
+    Center, Table, Thead, Tr, Th, Tbody, 
     Input,
     FormControl,
     Flex,
     Text,
     Box
   } from '@chakra-ui/react';
+import VoertuigRow from './VoertuigRow';
 
 function Vervoersmiddel() {
     const [naam, setNaam] = useState('');
@@ -13,9 +15,23 @@ function Vervoersmiddel() {
     const [datum, setDatum] = useState();
     const [categorie, setCategorie] = useState();
 
+    const [settings, setSettings] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+      fetch("http://127.0.0.1:8000/api/vervoersmiddels.json?user.id=1")
+      .then(resp => resp.json())
+      .then(data => {
+          //console.log(data)
+          setSettings(data)
+      })
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false))
+    }, [])
+
     const handleVervoersmiddelFormSubmit = (e) => {
     e.preventDefault();
-  
+
     fetch('https://127.0.0.1:8000/api/vervoersmiddels', {
         method: 'POST',
         headers: {
@@ -121,6 +137,35 @@ function Vervoersmiddel() {
             
           </form>
         </FormControl>
+
+        <div>
+            <Center>
+            <Box>
+                <Flex align="center">
+            <Text fontWeight="extrabold" color="#00326f"  fontSize={32}>OVERZICHT</Text>
+            
+                      </Flex>
+            <Table variant="simple" size="lg">
+                    <Thead>
+                        <Tr>
+                        <Th id="borderL">Naam</Th>
+                        <Th>Tarief</Th>
+                        <Th>Datum</Th>
+                        <Th>Categorie</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                            {loading && <p>Loading ...</p>}
+                            {settings && settings.map((row) => {
+                                return(
+                                    <VoertuigRow key={row.id} row={row}/>
+                                )
+                            })}
+                    </Tbody>
+                    </Table>
+                    </Box>
+                    </Center>
+        </div>
        </> 
     )
 }
