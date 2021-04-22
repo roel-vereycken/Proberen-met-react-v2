@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
+import moment from 'moment';
 import {
     Tr,
     Td,
@@ -17,16 +18,16 @@ function OverzichtRow({row}) {
     }, [tarief])
     
 
-    console.log(tarief)
+    console.log(datum)
     return (
         <Tr>
             <Td>{vervoersmiddel.naam}</Td>
-            <Td>{datum}</Td>
-            <Td>{kmStart}</Td>
-            <Td>{kmStop}</Td>
+            <Td>{moment(datum).calendar()}</Td>
+            <Td textAlign="right">{kmStart}</Td>
+            <Td textAlign="right">{kmStop}</Td>
             <Td>{locStart}</Td>
             <Td>{locStop}</Td>
-            <Td>{afstand * tariefPrijs}</Td>
+            <Td textAlign="right">{afstand * tariefPrijs}</Td>
         </Tr>
     )
 }

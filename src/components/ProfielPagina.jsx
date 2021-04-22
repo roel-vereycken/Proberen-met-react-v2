@@ -52,20 +52,20 @@ function ProfielPagina() {
       if(errors.length >= 1){
         if(errors.filter((object)=> object.propertyPath === "voornaam")){
           voornaamError = (errors.filter((object)=> object.propertyPath === "voornaam"));
-          setVoornaamErrorMessage(voornaamError[0].message)
+          setVoornaamErrorMessage(voornaamError.map((obj)=> obj.message))
           
         }
         if(errors.filter((object)=> object.propertyPath === "email")){
           emailError = (errors.filter((object)=> object.propertyPath === "email"));
-          setEmailErrorMessage(emailError[0].message)
+          setEmailErrorMessage(emailError.map((obj)=> obj.message))
         }
         if(errors.filter((object)=> object.propertyPath === "naam")){
           naamError = (errors.filter((object)=> object.propertyPath === "naam"));
-          setNaamErrorMessage(naamError[0].message)
+          setNaamErrorMessage(naamError.map((obj)=> obj.message))
         }
         if(errors.filter((object)=> object.propertyPath === "Functie")){
           functieError = (errors.filter((object)=> object.propertyPath === "Functie"));
-          setFunctieErrorMessage(functieError[0].message)
+          setFunctieErrorMessage(functieError.map((obj)=> obj.message))
         }
       }
     }, [errors])
@@ -128,7 +128,7 @@ function ProfielPagina() {
       <>
       
       /** ALERT MESSAGE */
-      <Center>{alert && <Text fontSize="12px" color="green">Uw gegevens zijn aangepast!</Text>}</Center>  
+      <Center>{alert && <Text borderRadius="5px" backgroundColor="green" py="5px" px="10%" fontSize="12px" color="white">Uw gegevens zijn aangepast!</Text>}</Center>  
 
       <Center>
       <Box width="80%" pb="300px">

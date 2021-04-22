@@ -32,10 +32,55 @@ function Verplaatsingen() {
     const [voertuig, setVoertuig] = useState('')
     const [voertuigId, setVoertuigId] = useState('')
     const [select, setSelect] = useState([])
-    const [user, setUser] = useState(1)
+    const [user, setUser] = useState(1)   ///  USER ID NOG VERANDEREN IN ID
+
+    /// ERROR MESSAGES
+    const [errors, setErrors] = useState([]);
+    // const [voertuigErrorMessage, setVoertuigErrorMessage] = useState("");
+    // const [datumErrorMessage, setDatumErrorMessage] = useState("");
+    // const [kmStartErrorMessage, setKmStartErrorMessage] = useState("");
+    // const [kmStopErrorMessage, setKmStopErrorMessage] = useState("");
+    // const [startpuntErrorMessage, setStartpuntErrorMessage] = useState("");
+    // const [eindpuntErrorMessage, setEindpuntErrorMessage] = useState("");
+    // let voertuigError = "";
+    // let datumError = "";
+    // let kmStartError = "";
+    // let kmStopError = "";
+    // let startpuntError = "";
+    // let eindpuntError = "";
 
     useEffect(() => {
-      fetch("http://127.0.0.1:8000/api/vervoersmiddels.json")
+      console.log(errors, "errors check")
+      // if(errors.length >= 1){
+      //   if(errors.filter((object)=> object.propertyPath === "datum")){
+      //     datumError = (errors.filter((object)=> object.propertyPath === "datum"));
+      //     setDatumErrorMessage(datumError.map((obj)=> obj.message)) 
+      //   }
+      //   if(errors.filter((object)=> object.propertyPath === "kmStart")){
+      //     kmStartError = (errors.filter((object)=> object.propertyPath === "kmStart"));
+      //     setKmStartErrorMessage(kmStartError.map((obj)=> obj.message))
+      //   }
+      //   if(errors.filter((object)=> object.propertyPath === "kmStop")){
+      //     kmStartError = (errors.filter((object)=> object.propertyPath === "kmStop"));
+      //     setKmStopErrorMessage(kmStopError.map((obj)=> obj.message))
+      //   }
+      //   if(errors.filter((object)=> object.propertyPath === "locStart")){
+      //     startpuntError = (errors.filter((object)=> object.propertyPath === "locStart"));
+      //     setStartpuntErrorMessage(startpuntError.map((obj)=> obj.message))
+      //   }
+      //   if(errors.filter((object)=> object.propertyPath === "locStop")){
+      //     eindpuntError = (errors.filter((object)=> object.propertyPath === "locStop"));
+      //     setEindpuntErrorMessage(eindpuntError.map((obj)=> obj.message))
+      //   }
+      //   if(errors.filter((object)=> object.propertyPath === "vervoersmiddel")){
+      //     voertuigError = (errors.filter((object)=> object.propertyPath === "vervoersmiddel"));
+      //     setVoertuigErrorMessage(voertuigError.map((obj)=> obj.message))
+      //   }
+      // }
+    }, [errors])
+
+    useEffect(() => {
+      fetch("https://127.0.0.1:8000/api/vervoersmiddels.json")
       .then(resp => resp.json())
       .then(data => {
         setSelect(data)
@@ -45,7 +90,7 @@ function Verplaatsingen() {
 
     const handleVerplaatsingFormSubmit = (e) => {
       e.preventDefault()
-      fetch('http://127.0.0.1:8000/api/verplaatsings', {
+      fetch('https://127.0.0.1:8000/api/verplaatsings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,12 +108,20 @@ function Verplaatsingen() {
         .then(response => response.json())
         .then(data => {
           console.log('gelukt');
-          console.log(data);
-          console.log(voertuig)
+          console.log(data, "data check");
+          //console.log(voertuig)
+          // console.log(data.violations, "data violation log")
+          // setErrors(data.violations)
+          // if(data.violations){
+          //   setErrors(data.violations)
+          // }else{
+          //   setErrors([]);
+          //   // setAlert(true)
+          // };
         })
         .catch(error => {
           console.log('mislukt');
-          console.log(error);
+          console.log(error, "main error check");
         })
         .finally(() => {
           
@@ -77,7 +130,7 @@ function Verplaatsingen() {
           setKmStop('');
           setStartpunt('');
           setEindpunt('');
-          setVoertuig('');
+          setVoertuig([]);
         });
     };
     
@@ -94,6 +147,20 @@ function Verplaatsingen() {
       <form onSubmit={handleVerplaatsingFormSubmit}>
                 <Flex align="center" justify="center" flexDirection="column">
                 <Box width="100%" >
+
+                      <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
+                        Voertuig:
+                      </Text>
+                      <select name="voertuig"  value={optionsState} onChange={e => {setOptionState(e.target.value)}}>
+                        <option id="0"></option>
+                          {select.map((object) => {
+                            
+                            return(
+                              <option value={object.id}> {object.naam}</option>
+                            )
+                          })}
+                      </select>
+
                       <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
                         Datum:
                       </Text>
@@ -104,6 +171,7 @@ function Verplaatsingen() {
                           value={datum}
                           onChange={e => setDatum(e.target.value)}
                         />
+
                         <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
                         Km-start:
                         </Text>
@@ -115,6 +183,7 @@ function Verplaatsingen() {
                           placeholder="Aantal kilometers"
                           onChange={e => setKmStart(e.target.value)}
                         />
+
                         <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
                         Km-stop:
                         </Text>
@@ -126,6 +195,7 @@ function Verplaatsingen() {
                           placeholder="Aantal kilometers"
                           onChange={e => setKmStop(e.target.value)}
                         />
+
                         <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
                         Startpunt:
                         </Text>
@@ -137,6 +207,7 @@ function Verplaatsingen() {
                           placeholder="Adres"
                           onChange={e => setStartpunt(e.target.value)}
                         />
+                        
                         <Text mt="5px" fontSize="16px" mb="3" color="#3cf0f0" align="left">
                         Eindpunt:
                         </Text>
@@ -148,16 +219,7 @@ function Verplaatsingen() {
                           placeholder="Adres"
                           onChange={e => setEindpunt(e.target.value)}
                         />
-                        
-                        <select name="voertuig"  value={optionsState} onChange={e => {setOptionState(e.target.value)}}>
-                        <option id="0"></option>
-                          {select.map((object) => {
-                            
-                            return(
-                              <option value={object.id}> {object.naam}</option>
-                            )
-                          })}
-                        </select>
+                      
                       <Wrap>
                       <Input
                       w="45%"

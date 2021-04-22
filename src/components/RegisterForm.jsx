@@ -73,7 +73,7 @@ function RegisterForm() {
 
       
   
-      fetch('http://127.0.0.1:8000/api/users', {
+      fetch('https://127.0.0.1:8000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
