@@ -10,10 +10,18 @@ import {
     Box,
     Center,
     Input,
+    
     Flex
   } from "@chakra-ui/react"
+import {Link} from 'react-router-dom';
 
 function OverzichtGrid() {
+
+    let userId = localStorage.getItem("user");
+      userId = JSON.parse(userId);
+      let id = userId.user
+
+      const [user, setUser] = useState(id);
     // const [datum, setDatum] = useState("")
     // const [vervoersmiddel, setVervoersMiddel] = useState("")
     // const [kmStart, setKmStart] = useState("")
@@ -25,7 +33,7 @@ function OverzichtGrid() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch("https://127.0.0.1:8000/api/verplaatsings.json?order[datum]=desc&user.id=1")
+        fetch(`http://127.0.0.1:8000/api/verplaatsings.json?order[datum]=desc&user.id=${user}`)
         .then(resp => resp.json())
         .then(data => {
             //console.log(data)
@@ -35,9 +43,19 @@ function OverzichtGrid() {
         .finally(() => setLoading(false))
       }, [])
 
-      let userId = localStorage.getItem("user");
-    userId = JSON.parse(userId);
-    console.log(userId);
+      const handleDownloadClick = (e) => {
+        e.preventDefault()
+        console.log("klik")
+
+        fetch(`http://127.0.0.1:8000/api/verplaatsings.csv?order%5Bdatum%5D=desc&user.id=${user}`)
+        .then(resp => resp.json())
+        .then(data => {
+            
+           console.log(data)
+        })
+        .catch(error => console.error(error))
+        
+      }
 
     return (
         
@@ -46,17 +64,26 @@ function OverzichtGrid() {
             <Box>
                 <Flex align="center">
             <Text fontWeight="extrabold" color="#00326f"  fontSize={32}>OVERZICHT</Text>
+            <a
+            id="rotKnop"
+            target='_blank' href={`http://127.0.0.1:8000/api/verplaatsings.csv?order%5Bdatum%5D=desc&user.id=${user}`}
+            >
             <Input
                       ml="auto"
                       w="100px"
                       id="buttonHover"
                       type="submit"
+
+                      
+
+
                       height="30px"
                       value="Download" 
                       color="white"
                       bg="#00326f"
                       borderRadius="5"
                       />
+                      </a>
                       </Flex>
             <Table variant="simple" size="lg">
                     <Thead>

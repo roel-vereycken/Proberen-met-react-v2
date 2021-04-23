@@ -27,7 +27,7 @@ function ProfielPagina() {
     const [naam, setNaam] = useState('');
     const [functie, setFunctie] = useState('');
     const [email, setEmail] = useState('');
-    const [user, setUser] = useState(1);    /// HIER TERUG VERANDER IN ID
+    const [user, setUser] = useState(id);    /// HIER TERUG VERANDER IN ID
     const [alert, setAlert] = useState(false);
 
     const history = useHistory();

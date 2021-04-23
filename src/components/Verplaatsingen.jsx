@@ -32,10 +32,10 @@ function Verplaatsingen() {
     const [voertuig, setVoertuig] = useState('')
     const [voertuigId, setVoertuigId] = useState('')
     const [select, setSelect] = useState([])
-    const [user, setUser] = useState(1)
+    const [user, setUser] = useState(id)
 
     useEffect(() => {
-      fetch("http://127.0.0.1:8000/api/vervoersmiddels.json")
+      fetch(`http://127.0.0.1:8000/api/vervoersmiddels.json?user.id=${user}`)
       .then(resp => resp.json())
       .then(data => {
         setSelect(data)
