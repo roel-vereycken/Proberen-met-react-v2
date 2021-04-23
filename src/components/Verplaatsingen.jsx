@@ -35,7 +35,7 @@ function Verplaatsingen() {
     const [user, setUser] = useState(1)   ///  USER ID NOG VERANDEREN IN ID
 
     /// ERROR MESSAGES
-    const [errors, setErrors] = useState([]);
+    //const [errors, setErrors] = useState([]);
     // const [voertuigErrorMessage, setVoertuigErrorMessage] = useState("");
     // const [datumErrorMessage, setDatumErrorMessage] = useState("");
     // const [kmStartErrorMessage, setKmStartErrorMessage] = useState("");
@@ -49,8 +49,8 @@ function Verplaatsingen() {
     // let startpuntError = "";
     // let eindpuntError = "";
 
-    useEffect(() => {
-      console.log(errors, "errors check")
+    //useEffect(() => {
+      //console.log(errors, "errors check")
       // if(errors.length >= 1){
       //   if(errors.filter((object)=> object.propertyPath === "datum")){
       //     datumError = (errors.filter((object)=> object.propertyPath === "datum"));
@@ -77,7 +77,7 @@ function Verplaatsingen() {
       //     setVoertuigErrorMessage(voertuigError.map((obj)=> obj.message))
       //   }
       // }
-    }, [errors])
+    //}, [errors])
 
     useEffect(() => {
       fetch("https://127.0.0.1:8000/api/vervoersmiddels.json")
