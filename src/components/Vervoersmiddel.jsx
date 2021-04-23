@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import moment from 'moment';
 import {
     Center, UnorderedList, ListItem, 
     Input,
@@ -37,13 +38,9 @@ function Vervoersmiddel() {
      * Haal de lijst van vervoersmiddels op
      */
     useEffect(() => {
-<<<<<<< HEAD
-      fetch("https://127.0.0.1:8000/api/vervoersmiddels.json?user.id=1")
-=======
       
 
-      fetch(`http://127.0.0.1:8000/api/vervoersmiddels.json?user.id=${user}`)
->>>>>>> 022b36791c9c2a05a396123506fed79ae3046670
+      fetch(`https://127.0.0.1:8000/api/vervoersmiddels.json?user.id=${user}`)
       .then(resp => resp.json())
       .then(data => {
           console.log("data", data)
@@ -65,7 +62,7 @@ function Vervoersmiddel() {
 
     useEffect(() => {
       if (fetchCall){
-        fetch(`http://127.0.0.1:8000/api/vervoersmiddels/${fetchCall}`)
+        fetch(`https://127.0.0.1:8000/api/vervoersmiddels/${fetchCall}`)
           .then(resp => resp.json())
           .then(data => {
               setNaam(data.naam)
@@ -87,7 +84,7 @@ function Vervoersmiddel() {
     e.preventDefault();
     console.log(fetchCall)
     if (!fetchCall){
-      fetch('http://127.0.0.1:8000/api/vervoersmiddels', {
+      fetch('https://127.0.0.1:8000/api/vervoersmiddels', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -123,7 +120,7 @@ function Vervoersmiddel() {
           setSubmit(submit + 1)
         });
     }else {
-      fetch(`http://127.0.0.1:8000/api/vervoersmiddels/${fetchCall}`, {
+      fetch(`https://127.0.0.1:8000/api/vervoersmiddels/${fetchCall}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -185,7 +182,7 @@ function Vervoersmiddel() {
                 
                 return (
                   <>
-                    <ListItem id={tarief.id}><Text fontSize="16px" color="#3cf0f0">€{tarief.prijs}/km,<br/> vanaf: {tarief.datum}</Text></ListItem>
+                    <ListItem id={tarief.id}><Text fontSize="16px" color="#3cf0f0">€{tarief.prijs}/km,<br/> vanaf: {moment(tarief.datum).calendar()}</Text></ListItem> 
                   </>
                 )
               })}

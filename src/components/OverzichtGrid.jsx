@@ -33,7 +33,7 @@ function OverzichtGrid() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/verplaatsings.json?order[datum]=desc&user.id=${user}`)
+        fetch(`https://127.0.0.1:8000/api/verplaatsings.json?order[datum]=desc&user.id=${user}`)
         .then(resp => resp.json())
         .then(data => {
             //console.log(data)
@@ -47,7 +47,7 @@ function OverzichtGrid() {
         e.preventDefault()
         console.log("klik")
 
-        fetch(`http://127.0.0.1:8000/api/verplaatsings.csv?order%5Bdatum%5D=desc&user.id=${user}`)
+        fetch(`https://127.0.0.1:8000/api/verplaatsings.csv?order%5Bdatum%5D=desc&user.id=${user}`)
         .then(resp => resp.json())
         .then(data => {
             
@@ -61,12 +61,12 @@ function OverzichtGrid() {
         
         <div>
             <Center>
-            <Box>
+            <Box paddingBottom="100px">
                 <Flex align="center">
             <Text fontWeight="extrabold" color="#00326f"  fontSize={32}>OVERZICHT</Text>
             <a
             id="rotKnop"
-            target='_blank' href={`http://127.0.0.1:8000/api/verplaatsings.csv?order%5Bdatum%5D=desc&user.id=${user}`}
+            target='_blank' href={`https://127.0.0.1:8000/api/verplaatsings.csv?order%5Bdatum%5D=desc&user.id=${user}`}
             >
             <Input
                       ml="auto"
