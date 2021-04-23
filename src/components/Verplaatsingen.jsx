@@ -32,6 +32,7 @@ function Verplaatsingen() {
     const [voertuig, setVoertuig] = useState('')
     const [voertuigId, setVoertuigId] = useState('')
     const [select, setSelect] = useState([])
+<<<<<<< HEAD
     const [user, setUser] = useState(1)   ///  USER ID NOG VERANDEREN IN ID
 
     /// ERROR MESSAGES
@@ -81,6 +82,12 @@ function Verplaatsingen() {
 
     useEffect(() => {
       fetch("https://127.0.0.1:8000/api/vervoersmiddels.json")
+=======
+    const [user, setUser] = useState(id)
+
+    useEffect(() => {
+      fetch(`http://127.0.0.1:8000/api/vervoersmiddels.json?user.id=${user}`)
+>>>>>>> 022b36791c9c2a05a396123506fed79ae3046670
       .then(resp => resp.json())
       .then(data => {
         setSelect(data)

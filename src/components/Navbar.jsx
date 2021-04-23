@@ -46,6 +46,10 @@ function Navbar() {
                                     <MenuItem className="IconDropDown" h={25} background="#00326f" border="none" borderTopRadius={5} color="white">Profiel</MenuItem>
                                     </Link>
                                     <hr/>
+                                    <Link to='/vervoersmiddel'>
+                                    <MenuItem className="IconDropDown" h={25} background="#00326f" border="none" color="white">Nieuw Vervoersmiddel</MenuItem>
+                                    </Link>
+                                    <hr/>
                                     <Link to='/verplaatsing'>
                                     <MenuItem className="IconDropDown" h={25} background="#00326f" border="none" color="white">Nieuwe verplaatsing</MenuItem>
                                     </Link>
@@ -53,6 +57,7 @@ function Navbar() {
                                     <Link to='/overzicht'>
                                     <MenuItem className="IconDropDown" h={25} background="#00326f" border="none" borderBottomRadius={5} color="white">Overzicht</MenuItem>
                                     </Link>
+                                    
                                 </MenuList>
                         </Menu>
                     </Flex>
